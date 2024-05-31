@@ -1,6 +1,6 @@
 package main
 
-import "admin-system-backend/impl"
+import "be/impl"
 
 func main() {
 	// StartHttpServer()
