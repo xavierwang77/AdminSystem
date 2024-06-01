@@ -8,6 +8,8 @@ import (
 	"io"
 	"net/http"
 	"os"
+
+	_ "github.com/lib/pq"
 )
 
 // UploadAvatarFile 处理上传的头像s
@@ -130,7 +132,7 @@ func UploadData(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tableName := "table_20231006215428" //该表用户存储管理员信息
+	tableName := "admin" //该表用户存储管理员信息
 
 	//自动建表（用户）
 	adminTableName, err := DB.CreateTableIfNotExists(db)
@@ -184,7 +186,7 @@ func VerifyLoginData(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询数据库中是否存在匹配的用户名和密码
-	tableName := "table_20231006215428" // 你的用户表
+	tableName := "admin" // 你的用户表
 	var storedPassword string
 	err = db.QueryRow(fmt.Sprintf("SELECT password FROM %s WHERE name = $1", tableName), loginData.Name).Scan(&storedPassword)
 	if err != nil {
@@ -230,7 +232,7 @@ func LocateAvatar(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询数据库中是否存在匹配的用户名
-	tableName := "table_20231006215428" // 你的用户表
+	tableName := "admin" // 你的用户表
 	var avatarFilename string
 	err = db.QueryRow(fmt.Sprintf("SELECT avatar_filename FROM %s WHERE name = $1", tableName), adminName.Name).Scan(&avatarFilename)
 	if err != nil {
@@ -289,7 +291,7 @@ func GetOriginalAdminData(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询指定用户名的用户数据
-	tableName := "table_20231006215428" // 你的用户表
+	tableName := "admin" // 你的用户表
 	var user showUser
 	err = db.QueryRow(fmt.Sprintf("SELECT name, email, password, phone_number, remarks FROM %s WHERE name = $1", tableName), adminName.Name).
 		Scan(&user.Name, &user.Email, &user.Password, &user.PhoneNumber, &user.Remarks)
@@ -329,7 +331,7 @@ func ChangeAdminData(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 使用 UPDATE 语句更新数据
-	tableName := "table_20231006215428"
+	tableName := "admin"
 	_, err = db.Exec(fmt.Sprintf("UPDATE %s SET name=$1, email=$2, password=$3, phone_number=$4, avatar_filename=$5, remarks=$6 WHERE name=$7",
 		tableName), changeAdminData.Name, changeAdminData.Email, changeAdminData.Password, changeAdminData.PhoneNumber, changeAdminData.AvatarFilename, changeAdminData.Remarks, changeAdminData.OriginalAdminName)
 	if err != nil {
@@ -369,7 +371,7 @@ func GetOriginalAdminAvatarName(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	//将用户原始头像文件名提取出来
-	tableName := "table_20231006215428"
+	tableName := "admin"
 	var originalAvatarName string
 	err = db.QueryRow(fmt.Sprintf("SELECT avatar_filename FROM %s WHERE name = $1", tableName), adminName.Name).Scan(&originalAvatarName)
 	if err != nil {
@@ -409,7 +411,7 @@ func DeleteAdmin(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	tableName := "table_20231006215428"
+	tableName := "admin"
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", tableName), adminName.Name).Scan(&userTableName)
 	if err != nil {

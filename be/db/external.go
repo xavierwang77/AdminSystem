@@ -4,11 +4,13 @@ import (
 	"admin_system/utils"
 	"database/sql"
 	"fmt"
+
+	_ "github.com/lib/pq"
 )
 
 // ConnectDB 连接到PG数据库
 func ConnectDB() (*sql.DB, error) {
-	connStr := "host=192.168.85.128 port=5432 user=postgres dbname=postgres password=766515 sslmode=disable"
+	connStr := "host=localhost port=5432 user=admin_system_user dbname=admin_system_db password=766515 sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		return nil, err
@@ -21,7 +23,7 @@ func CreateTableIfNotExists(db *sql.DB) (string, error) {
 	tableName := utils.GenerateUniqueTableName() //使用当前时间戳作为表名
 
 	createTableSQL := fmt.Sprintf(`
-		CREATE TABLE IF NOT EXISTS %s (
+		CREATE TABLE IF NOT EXISTS admin_system.%s (
 			id SERIAL PRIMARY KEY,
 			name VARCHAR(255),
 			email VARCHAR(255),
@@ -69,7 +71,7 @@ func CreateAdminTableIfNotExists(db *sql.DB) (string, error) {
 // UsernameExistsInAdminTable 检查用户名是否已经存在于管理员信息表中
 func UsernameExistsInAdminTable(db *sql.DB, username string) (bool, error) {
 	var exists bool
-	err := db.QueryRow("SELECT EXISTS (SELECT 1 FROM table_20231006215428 WHERE name = $1)", username).Scan(&exists)
+	err := db.QueryRow("SELECT EXISTS (SELECT 1 FROM admin WHERE name = $1)", username).Scan(&exists)
 	if err != nil {
 		return false, err
 	}

@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+
+	_ "github.com/lib/pq"
 )
 
 // VerifyUserLoginData 处理用户登陆数据
@@ -30,7 +32,7 @@ func VerifyUserLoginData(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	tableName := "table_20231006215428" // 你的用户表
+	tableName := "admin" // 你的用户表
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", tableName), loginData.AdminName).Scan(&userTableName)
 	if err != nil {
@@ -88,7 +90,7 @@ func LocateUserAvatar(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	tableName := "table_20231006215428" // 你的用户表
+	tableName := "admin" // 你的用户表
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", tableName), changeInfo.AdminName).Scan(&userTableName)
 	if err != nil {
@@ -144,7 +146,7 @@ func FetchUserData(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	tableName := "table_20231006215428" // 你的用户表
+	tableName := "admin" // 你的用户表
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", tableName), adminName.Name).Scan(&userTableName)
 	if err != nil {
@@ -200,7 +202,7 @@ func AddUser(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	adminTableName := "table_20231006215428" // 你的用户表
+	adminTableName := "admin" // 你的用户表
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", adminTableName), addForm.AdminName).Scan(&userTableName)
 	if err != nil {
@@ -250,7 +252,7 @@ func DeleteUserByName(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	tableName := "table_20231006215428" // 你的用户表
+	tableName := "admin" // 你的用户表
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", tableName), deleteInfo.AdminName).Scan(&userTableName)
 	if err != nil {
@@ -294,7 +296,7 @@ func GetOriginalUserData(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	tableName := "table_20231006215428" // 你的用户表
+	tableName := "admin" // 你的用户表
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", tableName), changeInfo.AdminName).Scan(&userTableName)
 	if err != nil {
@@ -339,7 +341,7 @@ func ChangeUserData(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	tableName := "table_20231006215428"
+	tableName := "admin"
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", tableName), changeData.AdminName).Scan(&userTableName)
 	if err != nil {
@@ -413,7 +415,7 @@ func GetOriginalAvatarName(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	tableName := "table_20231006215428"
+	tableName := "admin"
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", tableName), changeInfo.AdminName).Scan(&userTableName)
 	if err != nil {
@@ -458,7 +460,7 @@ func GetLoginPrivilege(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	tableName := "table_20231006215428"
+	tableName := "admin"
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", tableName), changeInfo.AdminName).Scan(&userTableName)
 	if err != nil {
@@ -503,7 +505,7 @@ func ChangeLoginPrivilege(w http.ResponseWriter, r *http.Request) {
 	defer db.Close()
 
 	// 查询管理员数据表中是否存在匹配的用户名并把该管理员名下的用户数据表名提取出来
-	tableName := "table_20231006215428" // 你的用户表
+	tableName := "admin" // 你的用户表
 	var userTableName string
 	err = db.QueryRow(fmt.Sprintf("SELECT table_name FROM %s WHERE name = $1", tableName), deleteInfo.AdminName).Scan(&userTableName)
 	if err != nil {
