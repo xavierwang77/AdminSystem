@@ -1,3 +1,5 @@
-module be
+module admin_system
 
-go 1.22
+go 1.22.2
+
+require github.com/rs/cors v1.11.0
