@@ -73,7 +73,7 @@
 
             async sendDataToBackend() {
                 try {
-                const response = await axios.post('http://localhost:8080/verifyUserLoginData',this.loginForm,{
+                const response = await axios.post('http://localhost:6230/api/verifyUserLoginData',this.loginForm,{
                     headers: {
                     'Content-Type': 'application/json',
                     }

@@ -252,7 +252,7 @@ func LocateAvatar(w http.ResponseWriter, r *http.Request) {
 	defer file.Close()
 
 	// // 构建头像文件的完整URL
-	// avatarURL := "http://localhost:8080/images/" + avatarFilename // 修改为适当的URL
+	// avatarURL := "http://localhost/api/images/" + avatarFilename // 修改为适当的URL
 
 	// // 返回头像文件URL作为响应
 	// response := map[string]string{"avatarURL": avatarURL}
