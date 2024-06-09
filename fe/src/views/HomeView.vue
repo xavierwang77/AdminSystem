@@ -134,7 +134,7 @@ export default {
     methods: {
         async fetchUserData() {
             try {
-                const response = await axios.post('http://localhost:6230/api/fetchUserData', this.adminInfo, {
+                const response = await axios.post('http://admin.abtxw.com/api/fetchUserData', this.adminInfo, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -152,7 +152,7 @@ export default {
         // async getUserAvatarURL() {
         //     for (let i = 0; i < this.tableData.length; i++) {
         //         try {
-        //             const response = await axios.post('http://localhost:6230/api/locateHomeUserAvatar', this.tableData[i], {
+        //             const response = await axios.post('http://admin.abtxw.com/api/locateHomeUserAvatar', this.tableData[i], {
         //                 headers: {
         //                     'Content-Type': 'application/json',
         //                 },
@@ -177,7 +177,7 @@ export default {
 
         async locateAvatar() {
             try {
-                const response = await axios.post('http://localhost:6230/api/locateAvatar', this.adminInfo, {
+                const response = await axios.post('http://admin.abtxw.com/api/locateAvatar', this.adminInfo, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -212,7 +212,7 @@ export default {
             this.deleteName.adminName = this.adminInfo.loginName;
             this.deleteName.userName = rows[index].name;
             try {
-                const response = await axios.post('http://localhost:6230/api/deleteUserByName', this.deleteName, {
+                const response = await axios.post('http://admin.abtxw.com/api/deleteUserByName', this.deleteName, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -233,7 +233,7 @@ export default {
             this.deleteName.adminName = this.adminInfo.loginName;
             this.deleteName.userName = rows[index].name;
             try {
-                const response = await axios.post('http://localhost:6230/api/changeLoginPrivilege', this.deleteName, {
+                const response = await axios.post('http://admin.abtxw.com/api/changeLoginPrivilege', this.deleteName, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -298,7 +298,7 @@ export default {
 
         async deleteAdmin() {
             try {
-                const response = await axios.post('http://localhost:6230/api/deleteAdmin', this.adminInfo, {
+                const response = await axios.post('http://admin.abtxw.com/api/deleteAdmin', this.adminInfo, {
                     headers: {
                         'Content-Type': 'application/json',
                     }

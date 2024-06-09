@@ -5,7 +5,7 @@
     <br/>
     <el-upload
     class="avatar-uploader"
-    action="http://localhost:6230/api/changeAvatarFile"
+    action="http://admin.abtxw.com/api/changeAvatarFile"
     :show-file-list="false"
     :on-success="handleAvatarSuccess"
     :before-upload="beforeAvatarUpload"
@@ -92,7 +92,7 @@ export default {
         methods: {
         async locateUserAvatar() {
             try {
-          const response = await axios.post('http://localhost:6230/api/locateUserAvatar',this.checkInfo,{
+          const response = await axios.post('http://admin.abtxw.com/api/locateUserAvatar',this.checkInfo,{
             headers: {
               'Content-Type': 'application/json',
             },
@@ -118,7 +118,7 @@ export default {
 
         async getOriginalUserData() {
             try {
-                const response = await axios.post('http://localhost:6230/api/getOriginalUserData',this.checkInfo,{
+                const response = await axios.post('http://admin.abtxw.com/api/getOriginalUserData',this.checkInfo,{
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -143,7 +143,7 @@ export default {
         async handleAvatarSuccess(res, file) {
             this.imageUrl = URL.createObjectURL(file.raw);
 
-            axios.get('http://localhost:6230/api/getAvatarFilename')
+            axios.get('http://admin.abtxw.com/api/getAvatarFilename')
                 .then((response) => {
                     const filename = response.data.filename;
                     this.changeForm.userAvatarName = filename;

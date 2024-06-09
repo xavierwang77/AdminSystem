@@ -10,7 +10,7 @@ import (
 
 // ConnectDB 连接到PG数据库
 func ConnectDB() (*sql.DB, error) {
-	connStr := "host=pg_dev port=5432 user=admin_system_user dbname=admin_system_db password=766515 sslmode=disable"
+	connStr := "host=admin_pg port=5432 user=admin_system_user dbname=admin_system_db password=766515 sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		return nil, err

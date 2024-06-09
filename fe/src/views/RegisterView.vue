@@ -5,7 +5,7 @@
     <br/>
     <el-upload
     class="avatar-uploader"
-    action="http://localhost:6230/api/uploadAvatarFile"
+    action="http://admin.abtxw.com/api/uploadAvatarFile"
     :show-file-list="false"
     :on-success="handleAvatarSuccess"
     :before-upload="beforeAvatarUpload">
@@ -121,7 +121,7 @@ import axios from 'axios';
       handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
 
-        axios.get('http://localhost:6230/api/getAvatarFilename')
+        axios.get('http://admin.abtxw.com/api/getAvatarFilename')
                 .then((response) => {
                     const filename = response.data.filename;
                     this.registerForm.avatarFilename = filename;
@@ -156,7 +156,7 @@ import axios from 'axios';
 
       async sendDataToBackend() {
         try {
-          const response = await axios.post('http://localhost:6230/api/uploadData',this.registerForm,{
+          const response = await axios.post('http://admin.abtxw.com/api/uploadData',this.registerForm,{
             headers: {
               'Content-Type': 'application/json',
             }

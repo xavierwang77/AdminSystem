@@ -5,7 +5,7 @@
     <br/>
     <el-upload
     class="avatar-uploader"
-    action="http://localhost:6230/api/changeAvatarFile"
+    action="http://admin.abtxw.com/api/changeAvatarFile"
     :show-file-list="false"
     :on-success="handleAvatarSuccess"
     :before-upload="beforeAvatarUpload">
@@ -104,7 +104,7 @@ export default {
     methods: {
         async locateUserAvatar() {
             try {
-          const response = await axios.post('http://localhost:6230/api/locateUserAvatar',this.changeInfo,{
+          const response = await axios.post('http://admin.abtxw.com/api/locateUserAvatar',this.changeInfo,{
             headers: {
               'Content-Type': 'application/json',
             },
@@ -130,7 +130,7 @@ export default {
 
         async getOriginalAvatarName() {
             try {
-                const response = await axios.post('http://localhost:6230/api/getOriginalAvatarName',this.changeInfo,{
+                const response = await axios.post('http://admin.abtxw.com/api/getOriginalAvatarName',this.changeInfo,{
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -146,7 +146,7 @@ export default {
 
         async getLoginPrivilege() {
           try {
-                const response = await axios.post('http://localhost:6230/api/getLoginPrivilege',this.changeInfo,{
+                const response = await axios.post('http://admin.abtxw.com/api/getLoginPrivilege',this.changeInfo,{
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -162,7 +162,7 @@ export default {
 
         async getOriginalUserData() {
             try {
-                const response = await axios.post('http://localhost:6230/api/getOriginalUserData',this.changeInfo,{
+                const response = await axios.post('http://admin.abtxw.com/api/getOriginalUserData',this.changeInfo,{
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -187,7 +187,7 @@ export default {
         async handleAvatarSuccess(res, file) {
             this.imageUrl = URL.createObjectURL(file.raw);
 
-            axios.get('http://localhost:6230/api/getAvatarFilename')
+            axios.get('http://admin.abtxw.com/api/getAvatarFilename')
                 .then((response) => {
                     const filename = response.data.filename;
                     this.changeForm.userAvatarName = filename;
@@ -243,7 +243,7 @@ export default {
 
         async sendDataToBackend() {
         try {
-          const response = await axios.post('http://localhost:6230/api/changeData',this.changeForm,{
+          const response = await axios.post('http://admin.abtxw.com/api/changeData',this.changeForm,{
             headers: {
               'Content-Type': 'application/json',
             }

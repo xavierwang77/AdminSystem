@@ -10,10 +10,6 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
-	// 添加CORS中间件
-	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"*"}, // 允许前端应用的域名
-	})
 
 	// 注册处理函数
 	mux.HandleFunc("/api/uploadAvatarFile", admin.UploadAvatarFile)
@@ -37,9 +33,17 @@ func main() {
 	mux.HandleFunc("/api/verifyUserLoginData", user.VerifyUserLoginData)
 	mux.HandleFunc("/api/getLoginPrivilege", user.GetLoginPrivilege)
 
+	// 添加详细的CORS中间件配置
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://admin.abtxw.com"}, // 允许的前端应用域名
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
+		AllowedHeaders:   []string{"Content-Type"},
+		AllowCredentials: true, // 如果需要支持带凭据的请求
+	})
+
 	// 使用CORS中间件包装处理器
 	handler := c.Handler(mux)
-	// http.HandleFunc("/api/upload", uploadFile)
+
 	err := http.ListenAndServe(":6270", handler)
 	if err != nil {
 		fmt.Errorf("http.ListenAndServe()函数执行错误: %v", err)

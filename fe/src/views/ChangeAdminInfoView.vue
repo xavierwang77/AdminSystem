@@ -5,7 +5,7 @@
     <br/>
     <el-upload
     class="avatar-uploader"
-    action="http://localhost:6230/api/changeAvatarFile"
+    action="http://admin.abtxw.com/api/changeAvatarFile"
     :show-file-list="false"
     :on-success="handleAvatarSuccess"
     :before-upload="beforeAvatarUpload">
@@ -97,7 +97,7 @@ import axios from 'axios'
         methods: {
             async getOriginalAdminData() {
                 try {
-                    const response = await axios.post('http://localhost:6230/api/getOriginalAdminData',this.changeInfo,{
+                    const response = await axios.post('http://admin.abtxw.com/api/getOriginalAdminData',this.changeInfo,{
                         headers: {
                             'Content-Type': 'application/json',
                         }
@@ -121,7 +121,7 @@ import axios from 'axios'
 
             async locateAdminAvatar() {
                 try {
-            const response = await axios.post('http://localhost:6230/api/locateAvatar',this.changeInfo,{
+            const response = await axios.post('http://admin.abtxw.com/api/locateAvatar',this.changeInfo,{
                 headers: {
                 'Content-Type': 'application/json',
                 },
@@ -147,7 +147,7 @@ import axios from 'axios'
 
             async getOriginalAvatarName() {
                 try {
-                    const response = await axios.post('http://localhost:6230/api/getOriginalAdminAvatarName',this.changeInfo,{
+                    const response = await axios.post('http://admin.abtxw.com/api/getOriginalAdminAvatarName',this.changeInfo,{
                         headers: {
                             'Content-Type': 'application/json',
                         }
@@ -164,7 +164,7 @@ import axios from 'axios'
             async handleAvatarSuccess(res, file) {
                 this.imageUrl = URL.createObjectURL(file.raw);
 
-                axios.get('http://localhost:6230/api/getAvatarFilename')
+                axios.get('http://admin.abtxw.com/api/getAvatarFilename')
                     .then((response) => {
                         const filename = response.data.filename;
                         this.changeForm.adminAvatarName = filename;
@@ -220,7 +220,7 @@ import axios from 'axios'
 
             async sendDataToBackend() {
             try {
-            const response = await axios.post('http://localhost:6230/api/changeAdminData',this.changeForm,{
+            const response = await axios.post('http://admin.abtxw.com/api/changeAdminData',this.changeForm,{
                 headers: {
                 'Content-Type': 'application/json',
                 }
