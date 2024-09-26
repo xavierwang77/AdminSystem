@@ -1,0 +1,31 @@
+version: '3.4'
+services:
+  admin_fe:
+    image: "admin_system:fe-latest"
+    container_name: admin_fe
+    ports:
+      - "6230:6230"
+    networks:
+      - admin_system
+  admin_be:
+    image: "admin_system:be-latest"
+    container_name: admin_be
+    ports:
+      - "6270:6270"
+    networks:
+      - admin_system
+  admin_pg:
+    image: "postgres:latest"
+    container_name: admin_pg
+    ports:
+      - "9323:5432"
+    networks:
+      - admin_system
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  admin_system:
+    driver: bridge

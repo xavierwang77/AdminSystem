@@ -1,5 +1,7 @@
-**/.idea
-**/.vscode
-**/node_modules
-**/.DS_Store
-**/logs
+.idea
+.vscode
+node_modules
+.DS_Store
+logs
+be/images
+.vscode
